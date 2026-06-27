@@ -2,7 +2,7 @@ terraform {
   required_version = ">= 1.10"
 
   backend "s3" {
-    bucket       = "atlas-tfstate-988787367176"   # <- your REAL bucket name from the apply output
+    bucket       = "atlas-tfstate-988787367176" # <- your REAL bucket name from the apply output
     key          = "bootstrap/terraform.tfstate"
     region       = "us-east-1"
     encrypt      = true
