@@ -1,0 +1,6 @@
+# ADR-001: GitHub Actions authentication to AWS
+
+**Status:** Accepted
+**Context:** CI/CD (GitHub Actions) needs to authenticate to AWS to run Terraform. The common approach is static IAM access keys stored as GitHub secrets. Static keys are long-lived, must be manually rotated, and represent a standing credential that grants account access indefinitely if leaked (via logs, screenshots, or compromised dependencies).
+**Decision:** Use OpenID Connect (OIDC) federation instead of static keys. AWS trusts GitHub's OIDC provider; workflows assume an IAM role and receive short-lived credentials scoped via the token's `sub` claim to this specific repository. No long-lived secret is stored in GitHub.
+**Consequences:** No secrets to store, leak, or rotate. Credentials are temporary (minutes) and automatically expire. Trust is scoped to one repo via the `sub` condition. Trade-off: the role currently uses PowerUserAccess for build velocity; this is a known temporary state to be narrowed to least-privilege in Phase 4 (tracked, not forgotten).
