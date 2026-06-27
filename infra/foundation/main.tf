@@ -33,5 +33,3 @@ provider "aws" {
     }
   }
 }
-
-# CI smoke test
