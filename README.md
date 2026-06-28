@@ -1,17 +1,15 @@
 [README(1).md](https://github.com/user-attachments/files/29427841/README.1.md)
 # Mission ATLAS — Real-Time Aircraft Telemetry Platform
 
-> Ingesting live ADS-B telemetry from real aircraft, built on AWS with Terraform — by a former airline Captain turned cloud engineer.
+> Ingesting live ADS-B telemetry from real aircraft, built on AWS with Terraform
 
 ATLAS pulls **live air traffic** from the OpenSky Network, streams it through a production-grade AWS pipeline, and is being built out toward real-time anomaly detection, tiered storage, and multi-region resilience. Every piece is Infrastructure as Code. Every architectural decision is documented.
-
-The aviation angle isn't decoration — it's the lens. Flight telemetry, real-time streaming, and what redundancy means when a system fails are things I understood from the cockpit before I wrote a line of Terraform.
 
 ---
 
 ## 🚦 Project Status
 
-ATLAS is built in deployable phases. This is an **active build** — the table below is the honest current state, not a wishlist.
+ATLAS is built in deployable phases. This is an **active build**
 
 | Phase | Focus | Status |
 |-------|-------|--------|
@@ -50,8 +48,6 @@ A typical poll ingests **~180 live aircraft** per batch.
 ---
 
 ## 🔐 Engineering Foundations (Phase 0)
-
-Before any feature existed, ATLAS established the things that separate reproducible infrastructure from click-ops-with-a-screenshot:
 
 - **Remote Terraform state** — versioned, encrypted, private S3 bucket with native S3 state locking (no DynamoDB lock table; deprecated as of Terraform 1.11).
 - **Secure CI identity** — GitHub Actions authenticates to AWS via **OpenID Connect (OIDC)**. No long-lived access keys are stored anywhere; trust is scoped to this repository via the token's `sub` claim, and credentials are short-lived and auto-expiring.
@@ -121,9 +117,5 @@ terraform destroy
 ```
 
 ---
-
-## 👩‍✈️ About
-
-Built by a former airline Captain (ATP, 11+ years, multiple type ratings) transitioning into cloud architecture. ATLAS is the flagship project of that transition — a real-time telemetry platform that leans into a background no bootcamp can replicate: an operator who understands the data because she used to generate it at altitude.
 
 *Live air traffic data provided by the [OpenSky Network](https://opensky-network.org/).*
